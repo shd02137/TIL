@@ -4,7 +4,7 @@
 
 ## What?
 
-### vcs
+### vcs(version control system)
 
 git은 버전관리 시스템이다.
 
@@ -12,77 +12,166 @@ git은 버전관리 시스템이다.
 
 ## Why?
 
+협업 및 버전 관리를 위해 사용한다.
+
+변경점 관리, 백업, 복구등이 가능하다.
+
+
+
+## Git을 사용하기에 앞서
+
+### CLI
+
+CLI는 command_Line Interface의 약자이고,
+
+Git은 CLI를 사용한다.
+
+
+
+#### 명령어
+
+기본적으로 리눅스와 동일하다.
+
+| 명령어 | 설명                                                         |
+| ------ | ------------------------------------------------------------ |
+| mkdir  | 디렉토리(폴더)를 생성한다.                                   |
+| touch  | txt 파일을 만든다.                                           |
+| cd     | 디렉토리를 바꾼다.                                           |
+| pwd    | 현재 디렉토리위치를 확인한다.                                |
+| ls     | 현재 디렉토리에 있는 목록을 본다.<br />-a를 붙이면 숨겨진 파일을 볼 수 있다. |
+| rm     | 파일을 삭제한다.<br />-r을 붙이면 디렉토리도 삭제가능하다.<br />-f를 붙이면 무조건 삭제한다. |
+| mv     | 파일 혹은 디렉토리를 이동한다.<br />첫번째 인자에서 두번째 인자로 이동한다. |
+| vim    | vim을 사용하여 첫번째 인자를 연다.                           |
+
+
+
+##### Vim
+
+CLI 문서 편집기이다.
+
+1. 모드
+
+| 모드     | 설명                                                         |
+| -------- | ------------------------------------------------------------ |
+| 입력모드 | 내용을 입력한다.<br />명령모드에서 i 를 눌러 전환가능하다.   |
+| 명령모드 | 명령어를 입력한다.<br />입력모드에서 esc를 눌러 전환가능하다. |
+
+2. 명령어
+
+| 명령어    | 설명         |
+| --------- | ------------ |
+| :w        | 저장         |
+| :q        | 종료         |
+| :wq       | 저장 후 종료 |
+| :q!       | 강제 종료    |
+| {숫자} gg | 줄 이동      |
+| dd        | 복사         |
+| yy        | 붙혀넣기     |
 
 
 
 
-## How?
+## Git에 대하여
 
-### 초기화
-
-`$ git init` 로 초기화한다.
+### 명령어
 
 
+| 명령어                                                       | 설명                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| git init                                                     | 본 폴더를 저장소로 초기화                                    |
+| git add < filename >                                         | 파일을 스테이지에 올림                                       |
+| git commit -m '내용'                                         | 스테이지에 올라온 변경사항을 commit한다.                     |
+| git log                                                      | commit 이력 보기                                             |
+| git status                                                   | 저장소의 상태를 확인한다.                                    |
+| git restore <file/name>                                      | 변경된 파일을 commit했을때의 상태로 되돌린다.<br />stage에 해당 파일이 있을경우 ㄴstage된 상태롤 되돌린다. |
+| git config --global user.name "이름"<br/>git config --global user.email "이메일" | 컴퓨터에서 git 사용자의 이름 혹은 이메일을 설정한다.         |
+
+
+
+### 저장소(repository)
+
+* git 폴더
+
+저장소의 상태변화(버전)을 추적 관리하는 폴더로 일반적으로 편집하지 않는다.
+
+#### 저장소 내부 파일의 상태 변화
+
+저장소 내부의 파일은 아래의 그림과 같이 상태 변화를 한다.
+
+![image-20201229180743705](git_basic.assets/image-20201229180743705.png)
+
+- untracked/untracking
+
+  git이 추적하지 않는 폴더(파일)이다. 
+
+  `$ git add `를 사용하여 tracking 할 수 있다.
+
+- unmodified
+
+  tracking하고 있으나 변경사항이 없는 폴더이다.
+
+  폴더에 변경사항이 있을시 modified 상태로 변화한다.
+
+- modified
+
+  tracking하는 폴더에 변경사항이 있는 상태이다.
+
+  `$ git add`를 통해 stage에 올릴 수 있다.
+
+- staged
+
+  변경사항을 stage에 올려놓은 상태이다.
+
+  이 상태에 있는 변경사항은 ` $ git commit ` 으로 commit 할 수 있고, commit한 뒤에는 unmodified 한 상태로 돌아간다.
+
+
+
+### 사용 방법
+
+git을 처음 사용할 때에는 아래의 명령어를 사용해 사용자의 이메일을 반드시 입력하여야한다.
 
 ```
-$ git add new.txt
+$ git config --global user.name "이름"
+$ git config --global user.email "이메일"
+```
+
+
+
+파일을 저장소(repository)로 만들기위해 아래의 명령어를 사용한다.
+
+```
+$ git init
+```
+
+ 만약 상위 폴더가 git 저장소로 초기화 되어있는 경우에 git init를 할경우 서브모듈로 작동한다.
+
+
+
+파일을 stage 상태로 만들고 저장하기 위해서 다음과 같은 명령어를 사용한다.
+
+```
+$ git add <file/dirname>
 $ git commit -m "first commit"
 ```
 
-```python
-def myfunc():
-	print("py")
+
+
+변경했던 파일에 문제가 생겨 복구해야할 일 이 생긴다면 아래의 명령어를 사용해서 복구 할 수 있다.
+
+``` 
+$ git restore <file/dirname>
 ```
 
 
 
-| 명령어               | 설명                      | 추가 | 내용 |
-| -------------------- | ------------------------- | ---- | ---- |
-| git init             | 본 폴더를 저장소로 초기화 |      |      |
-| git add < filename > | 파일을 스테이지에 올림    |      |      |
-| git commit -m '내용' | 변경사항 커밋             |      |      |
-| git log              |                           |      |      |
+현재 저장소에서 commit한 이력을 보고 싶을 때에는 아래의 명령어를 사용한다.
+
+```
+$ git log
+```
 
 
 
-사용했던 CLI 명령어들
-mkdir
-touch
-cd (~/./..)
-ls
-ls -a
-rm
-rm -r
-mv
+## 참고 사이트
 
-CLI 문서 편집기 vim
-i => 편집(insert)모드
-esc => 명령모드
-명령모드에서
-:w => 저장
-:q => 종료
-:wq => 저장 후 종료
-:q! => 강제 종료
-
-git 명령어
-git config --global user.name "이름"
-git config --global user.email "이메일"
-git init
-git status
-git log
-git add <file/dirname>
-git commit -m "<message>"
-git restore <file/dirname>
-
-git 핵심 주제어들
-VCS
-폴더(directory)
-저장소(repository)
-.git/
-스테이지(stage area)
-commits
-변경사항
-untracked/tracking
-unmodified
-modified
-staged
+http://git-scm.com/book/ko/v2
