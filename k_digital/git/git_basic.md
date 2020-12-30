@@ -174,4 +174,5 @@ $ git log
 
 ## 참고 사이트
 
-http://git-scm.com/book/ko/v2
+[깃 기본서]: http://git-scm.com/book/ko/v2
+
