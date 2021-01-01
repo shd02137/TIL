@@ -42,3 +42,67 @@ def solution(phone_book):
 파이선에서 딕셔너리는 해시로 구현되어있다. 이것을 이용한다.
 
 전화 번호를 해시 키로 이용하였고 해시 값으로 해당 번호의 유무를 True/False로 구분하였다.
+
+
+
+## 다시 풀어보기
+
+```python
+def solution(phone_book):
+    answer = True
+    hashmap={}
+    for phone_number in phone_book:
+        new_number = ""
+        for c in phone_number:
+            new_number += c
+            if new_number in hashmap.keys():
+                return False
+        hashmap[new_number] = 1
+    return answer
+```
+
+이렇게 풀어 봤는데 테스트케이스 8,9번이 통과가 안된다.
+
+왜지?
+
+테스트케이스를 추가시키다 보니까 이유가 나왔다.
+
+접두어가 뒤에 오는 경우에는 찾을 수 없는 문제가 발생했다.
+
+이것을 해결하기 위해 딕셔너리를 먼저 다 만든 뒤에 접두어를 찾기로 했다.
+
+```python
+def solution(phone_book):
+    answer = True
+    hashmap={}
+    for phone_number in phone_book:
+        hashmap[phone_number] = 1
+    for phone_number in phone_book:
+        new_number = ""
+        for c in phone_number:
+            new_number += c
+            if new_number in hashmap.keys() and new_number != phone_number:
+                return False
+    return answer
+```
+
+결국 앞에서 본 코드와 같은 결과가 나왔다.
+
+이 코드를 쓰고 순간 헷갈려서 
+
+if new_number in hashmap.keys() and new_number != phone_number: 가 아닌
+
+if new_number in hashmap.keys() and new_number is not phone_number: 으로 작성했었다.
+
+두 구문은 대충보기에는 같아 보이지만,
+
+!= 은 값을 비교하는 것이고, is not은 주소를 비교하는 것이므로 절대 같은 구문이 아니다.
+
+
+
+## 배운것
+
+dict()은 해시구조로 이루어져있다.
+
+!= 은 값을 비교하는 것이고, is not은 주소를 비교하는 것이라는 차이점이 있다.
+
