@@ -117,19 +117,151 @@ help(함수명) 으로 호출이 가능하다.
   print(string)
   ```
 
+
+
+
+
+
+## 람다함수
+
+### map
+
+
+
+```python
+def total(s,b):
+	return s+b
+	
+score = [45,89,72,53,94]
+bouns = [2,4,6,0,1]
+for s in map(total,score,bonus):
+	print(s,end = ",")
+
+# result => 47, 93, 78, 53, 95,
+```
+
+
+
+
+
+### 필터
+
+filter(판정함수,시퀀스) => 시퀀스
+
+* 시퀀스의 각 요소를 판정함수에 전달하여 True인 요소로만 구성된 새로운 시퀀스를 리턴한다.
+
+  ```python
+  def flunk(s):
+  	return s < 60
+  	
+  score = [45,89,72,53,94]
+  for s in filter(flunk,score):
+  	print(s)
+  	
+  	
+  # result => 45,53
+  ```
+
+
+
+
+### 람다함수
+
+* 한줄로 정의되는함수의 축약 표현으로 함수에 이름이 없고 변수에 대입하여 사용한다.
+
+  ```python
+  score = [45,89,72,53,94]
   
+  for s in filter(lambda x : x< 60, score):
+  	print(s)
+  	
+  # result => 45 53
+  ```
 
-## 필터
+  ```python
+  lambda x : x+1
+  
+  # def increase(x):
+  # 	return x + 1
+  ```
 
-
-
-
-
-## 람다 
-
-
+  
 
 
 
 ## 단정문 (assert)
+
+* assert 조건, 메시지의 형태로 사용하며 조건이 True이면, 통과하지만, False이면 메시지를 가지는 예외를 발생시킨다.
+
+  ```python
+  score = 128
+  assert score < 100, "점수는 100이하로 설정"
+  print(score)
+  
+  # result => AssertionError : 점수는 100이하로 설정 
+  ```
+
+
+
+## 모듈
+
+* import traceback
+
+  오류를 위치를 좀더 빠르게 찾기 위해 사용한다.
+
+  ```
+  import traceback
+  
+  traceback.print_stack()	# 예외위치까지 오는데 거친 함수를 출력
+  traceback.print_exc()	# 구체적인 예외 내용을 출력
+  ```
+
+  
+
+
+
+## 클래스
+
+* 클래스의 print 모양에 대한 매서드
+
+  ```python
+  class Example:
+  	def __init__(self):
+  		self.ex = None
+  		:
+  		:
+  
+  	def __str__(self):
+  		return f"<Example {self.ex}>"
+  	
+  example = Example()
+  print(example)
+  
+  #result => <Example None>
+  ```
+
+  
+
+* 클래스가 list같은 컬렉션안에 있을때의 출력을 위한 매서드
+
+  ```python
+  class Example:
+      def __init__(self):
+  	    self.ex = None
+  
+  
+      def __str__(self):
+  	    return f"<Example {self.ex}>"
+      
+      def __repr__(self):
+          return f"<Ex {self.ex}>"
+  	
+  example = Example()
+  li = [example]
+  print(li)
+  
+  # result => <EX None>
+  ```
+
+  
 
