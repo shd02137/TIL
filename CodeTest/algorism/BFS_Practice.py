@@ -81,16 +81,31 @@ class Run:
         elif index == 2:
             calc = DFS(self.map)
             calc.print_result()
-
+        else:
+            return []
 
         return calc.result
 
+    def __str__(self):
+        return f"알고리즘을 테스트하는 실행파일 입니다.\n지난 정답은 {self.result}입니다."
 
-class DFS:
+
+class PathFindAlgorism:
     def __init__(self,map):
         self.map = map
         self.result = self.calc()
         
+    def calc(self):
+        
+        pass
+        
+    def print_result(self):
+
+        print(f"결과는 {self.result} 입니다.")
+
+
+
+class DFS(PathFindAlgorism):
 
     def calc(self):
         n = len(self.map)
@@ -111,19 +126,10 @@ class DFS:
                 visited = self.dfs_subcalc(i,visited)
 
         return visited
-        
-
-    def print_result(self):
-
-        print(f"결과는 {self.result} 입니다.")
 
     
 
-
-class BFS:
-    def __init__(self,map):
-        self.map = map
-        self.result = self.calc()
+class BFS(PathFindAlgorism):
 
     def calc(self):
         result = []
@@ -140,10 +146,6 @@ class BFS:
                  if value == 1 and i not in queue and i not in result])
 
         return result
-
-    def print_result(self):
-
-        print(f"결과는 {self.result} 입니다.")
 
     
 
