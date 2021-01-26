@@ -137,6 +137,9 @@ And, Or, Between A and B,IN(A,B,C), Like등이 사용 가능하다.
 
 -- 길동으로 끝나며 한글자가 앞에 들어가는 모든 이름
 > select Name from userTbl where name Like '_길동'; 
+
+-- null을 찾을경우
+> select name from userTbl where name is null;
 ```
 
 
@@ -342,7 +345,16 @@ UPDATE 테이블이름 SET 열1=값1, 열2=값2 ... [WHERE 조건];
   -- NULL, 200
   ```
 
-  
+
+
+
+#### Case ~ when ~ else ~ end
+
+```mysql
+> SELECT NAME, CASE WHEN SEX LIKE 'male' THEN 'M' ELSE 'F' END FROM userTbl;
+```
+
+
 
 ### 문자열 결합
 
