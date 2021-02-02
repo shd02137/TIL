@@ -6,17 +6,15 @@ from default.Question import Questions
 
 
 def solution(l):
-    answer = 0
     n,k= map(int,l.input().split())
     stuffs = []
     for _ in range(n):
         w, h  = map(int,l.input().split())
         stuffs.append([w,h])
-    print(n,k)
-    print(stuffs)
-    
 
-    return answer
+    print(stuffs)
+
+    return n
 
 file_paths = ["ex1.txt"]
 
