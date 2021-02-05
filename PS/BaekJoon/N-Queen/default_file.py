@@ -41,7 +41,7 @@ def solution(l):
                 chess_queen.pop()
             
         return total
-
+    
     for m in range(n):
         answer += now_chess(m,0)
         chess_queen.pop()
